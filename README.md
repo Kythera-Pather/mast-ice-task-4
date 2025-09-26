@@ -29,6 +29,8 @@ The admin can add new cars to the list by filling the information about the car 
 
 The cutomer can check out all the car available. Seeing the make , modal, price for the day and even a picture of what it looks like.  When they press the select button it will show them a modal popup. The admin can also enter this page from the login with a different username and password 
 
+---
+
 ##### Pop up Modal
 <img width="623" height="1339" alt="image" src="https://github.com/user-attachments/assets/a6dc543e-a79f-4e5e-9937-393502037df2" />
 
