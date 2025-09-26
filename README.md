@@ -27,7 +27,7 @@ The admin can add new cars to the list by filling the information about the car 
 
 ---
 
-The cutomer can check out all the car available. Seeing the make , modal, price for the day and even a picture of what it looks like.  When they press the select button it will show them a modal popup. The admin can also enter this page from the login with a different username and password 
+The customer can check out all the car available. Seeing the make, modal, price for the day and even a picture of what it looks like. When they press the select button it will show them a modal popup. The admin can also enter this page from the login with a different username and password.
 
 ---
 
@@ -36,7 +36,7 @@ The cutomer can check out all the car available. Seeing the make , modal, price 
 
 ---
 
-The customer is showen the car they want to rent, with the discription of the car. The customer must enter the number of days they want, which will calculate the amount they owe. They then comfirm the booking or cancel where they can see other cars. 
+The customer is shown the car they want to rent, with the description of the car. The customer must enter the number of days they want, which will calculate the amount they owe. They then confirm the booking or cancel where they can see other cars.
 
 ---
  #### ConfirmationScreen.tsx
@@ -44,5 +44,5 @@ The customer is showen the car they want to rent, with the discription of the ca
  
  ---
  
- The cutomer is then shown the car they have picked with the comfirm days and price for thoes days as well. They can then press the back to home button which will take them back to the login screen.  
+The customer is then shown the car they have picked with the confirm days and price for those days as well. They can then press the back to home button which will take them back to the login screen.  
 
