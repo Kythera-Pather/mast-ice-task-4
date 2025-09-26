@@ -7,7 +7,9 @@
 ### Screen shot of each page
 #### LoginScreen.tsx
 <img width="594" height="1292" alt="image" src="https://github.com/user-attachments/assets/6239a655-c378-449d-a2aa-f46049d577c8" />
+
 ---
+
  Here the Admin and customer must login. the Admin has a username and password for them to go to the Admin screen . the username is "admin" and password is "111".The customer can enter their password and username which will take them to the Customer page.
   
 ---
