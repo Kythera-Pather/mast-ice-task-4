@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  Image,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { ImageBackground,View, Text, TextInput, Button, Image, FlatList, StyleSheet, TouchableOpacity,} from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { Car } from "../App";
 
@@ -49,7 +40,7 @@ export default function AdminScreen({
       model,
       costPerDay: parseFloat(cost),
       description,
-      imageUri,
+      image: imageUri,
     };
 
     addCar(newCar);
@@ -63,6 +54,11 @@ export default function AdminScreen({
   };
 
   return (
+    <ImageBackground
+          source={{ uri: "https://i.pinimg.com/1200x/47/67/0a/47670a460ad1a68bb88c3cfc50b51535.jpg" }}
+          style={styles.backgroundImage}
+          resizeMode="cover"
+        >
     <View style={styles.container}>
       {/* Header with Logout */}
       <View style={styles.headerRow}>
@@ -104,7 +100,7 @@ export default function AdminScreen({
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.carItem}>
-            {item.imageUri && <Image source={{ uri: item.imageUri }} style={styles.carImage} />}
+            {item.image && <Image source={{ uri: item.image }} style={styles.carImage} />}
             <View>
               <Text style={styles.carText}>
                 {item.make} {item.model} - R{item.costPerDay}/day
@@ -115,14 +111,46 @@ export default function AdminScreen({
         )}
       />
     </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: "#f9f9f9" },
-  headerRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
-  title: { fontSize: 24, fontWeight: "bold", color: "#333" },
-  subtitle: { fontSize: 18, fontWeight: "600", marginVertical: 12, color: "#444" },
+  container: { 
+    flex: 1, 
+    padding: 20, 
+    backgroundColor: "transparent", 
+  },
+
+  backgroundImage: {
+    flex: 1,
+  },
+
+  headerRow: { 
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    alignItems: "center",
+    padding: 8,
+   },
+
+  title: { 
+    fontSize: 24, 
+    fontWeight: "bold", 
+    color: "#f1a23aff", 
+    textAlign: "center", 
+    marginBottom: 12,
+   },
+
+  subtitle: { 
+    fontSize: 23, 
+    fontWeight: "600", 
+    marginVertical: 12, 
+    color: "#083531ff", 
+    textAlign: "center", 
+    marginTop: 20,
+    textDecorationLine: "underline",
+   },
+
   input: {
     borderWidth: 1,
     borderColor: "#ccc",
@@ -131,7 +159,12 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     backgroundColor: "#fff",
   },
-  multilineInput: { height: 80, textAlignVertical: "top" },
+
+  multilineInput: { 
+    height: 80, 
+    textAlignVertical: "top", 
+  },
+
   previewImage: {
     width: 120,
     height: 90,
@@ -139,7 +172,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignSelf: "center",
   },
-  addButton: { marginVertical: 10 },
+
+  addButton: {
+   marginVertical: 10,
+ },
+
   carItem: {
     flexDirection: "row",
     alignItems: "center",
@@ -150,11 +187,34 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 8,
   },
-  carImage: { width: 70, height: 50, borderRadius: 6, marginRight: 10 },
-  carText: { fontSize: 16, fontWeight: "500", color: "#222" },
-  carDescription: { fontSize: 14, color: "#666" },
-  smallButton: { backgroundColor: "#eee", padding: 8, borderRadius: 8 },
-  smallButtonText: { color: "#333" },
+
+  carImage: { 
+    width: 70, 
+    height: 50, 
+    borderRadius: 6, 
+    marginRight: 10, 
+  },
+
+
+  carText: { fontSize: 16, 
+    fontWeight: "500", 
+    color: "#222", 
+    marginBottom: 4, 
+  },
+
+  carDescription: { 
+    fontSize: 14, 
+    color: "#666", 
+  },
+
+  smallButton: { 
+    backgroundColor: "#eee", 
+    padding: 8, 
+    borderRadius: 8, 
+    alignItems: "center",
+   },
+
+  smallButtonText: { 
+    color: "#333",
+   },
 });
-
-

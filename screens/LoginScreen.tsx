@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Animated, ImageBackground } from "react-native";
 
-export default function LoginScreen({ onLogin }: { onLogin: (username: string) => void }) {
+export default function LoginScreen({ onLogin }: { onLogin: (username: string, password: string) => void }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const anim = useRef(new Animated.Value(0)).current;
@@ -10,28 +10,37 @@ export default function LoginScreen({ onLogin }: { onLogin: (username: string) =
     Animated.sequence([
       Animated.timing(anim, { toValue: 1, duration: 120, useNativeDriver: true }),
       Animated.timing(anim, { toValue: 0, duration: 120, useNativeDriver: true }),
-    ]).start(() => onLogin(username));
+    ]).start(() => onLogin(username, password));
   };
 
   const scale = anim.interpolate({ inputRange: [0, 1], outputRange: [1, 0.96] });
 
   return (
-    <ImageBackground 
-      source={require('../assets/Background.jpg')} // Corrected path
-      style={styles.screen}
+    // Image background with overlay
+    <ImageBackground
+      source={{ uri: "https://i.pinimg.com/1200x/47/67/0a/47670a460ad1a68bb88c3cfc50b51535.jpg" }}
+      style={styles.backgroundImage}
       resizeMode="cover"
     >
-      <View style={styles.screen}>
-         <Text style={styles.logo}>Car Booking Services</Text> 
-        <Text style={styles.h1}>Welcome to the car booking services</Text>
-        <TextInput placeholder="Username" value={username} onChangeText={setUsername} style={styles.input} />
-        <TextInput placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry style={styles.input} />
-        <Animated.View style={{ transform: [{ scale }], width: "60%" }}>
-          <TouchableOpacity onPress={handlePress} style={styles.button}>
-            <Text style={styles.buttonText}>Login</Text>
-          </TouchableOpacity>
-        </Animated.View>
-        
+      <View style={styles.overlay}>
+        <View style={styles.screen}>
+          <View style={styles.card}>
+            <Text style={styles.logo}>Car Booking Services</Text>
+            <Text style={styles.h1}>Welcome to the car booking services</Text>
+            <TextInput
+            // username input and password input
+              placeholder="Username" value={username} onChangeText={setUsername} style={styles.input}
+            />
+            <TextInput
+              placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry style={styles.input}
+            />
+            <Animated.View style={{ transform: [{ scale }], width: "60%" }}>
+              <TouchableOpacity onPress={handlePress} style={styles.button}>
+                <Text style={styles.buttonText}>Login</Text>
+              </TouchableOpacity>
+            </Animated.View>
+          </View>
+        </View>
       </View>
     </ImageBackground>
   );
@@ -44,6 +53,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
     },
+
+  backgroundImage: {
+    flex: 1,
+  },
+
+  overlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.3)", 
+  },
 
   logo: { 
     fontSize: 20, 

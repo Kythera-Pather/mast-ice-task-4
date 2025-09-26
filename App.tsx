@@ -12,19 +12,55 @@ export type Car = {
   model: string;
   costPerDay: number;
   description?: string;
-  imageUri?: string;
+  image?: string;
 };
 
 export default function App(): JSX.Element {
   const [screen, setScreen] = useState<"login" | "admin" | "customer" | "confirm">("login");
-
+ // Mock initial cars
   const [cars, setCars] = useState<Car[]>([
-    { id: "1", make: "Hyundai", model: "Grand i10", costPerDay: 400 },
-    { id: "2", make: "Toyota", model: "Corolla Quest", costPerDay: 670 },
-    { id: "3", make: "Volkswagen", model: "Polo Sedan", costPerDay: 650 },
-    { id: "4", make: "Volkswagen", model: "T-Cross", costPerDay: 800 },
-    { id: "5", make: "Toyota", model: "Fortuner", costPerDay: 1500 },
-    { id: "6", make: "BMW", model: "3 Series", costPerDay: 1900 },
+    {
+      id: "1",
+      make: "Hyundai",
+      model: "Grand i10", 
+      costPerDay: 400,
+      image: "https://i.pinimg.com/1200x/75/b4/6a/75b46add3f2b8e172018e48e7d647795.jpg",
+    },
+    {
+      id: "2",
+      make: "Toyota",
+      model: "Corolla Quest",
+      costPerDay: 670,
+      image: "https://i.pinimg.com/1200x/24/a0/22/24a02226f7441d54f32e86a6680d3d77.jpg",
+    },
+    {
+      id: "3",
+      make: "Volkswagen",
+      model: "Polo Sedan",
+      costPerDay: 650,
+      image: "https://i.pinimg.com/736x/2d/f0/c3/2df0c3aa10bb5fcf561da30108984f99.jpg",
+    },
+    {
+      id: "4",
+      make: "Volkswagen",
+      model: "T-Cross",
+      costPerDay: 800,
+      image: "https://i.pinimg.com/736x/b1/a9/2a/b1a92a0c58b12d29e73c507a3e26c85b.jpg",
+    },
+    {
+      id: "5",
+      make: "Toyota",
+      model: "Fortuner",
+      costPerDay: 1500,
+      image: "https://i.pinimg.com/1200x/78/4f/d8/784fd84c1790416f17d678b925a11278.jpg",
+    },
+    {
+      id: "6",
+      make: "BMW",
+      model: "3 Series",
+      costPerDay: 1900,
+      image: "https://i.pinimg.com/736x/c1/72/0e/c1720e26c49d925b5f082f4333f9402f.jpg",
+    },
   ]);
 
   const [confirmedBooking, setConfirmedBooking] = useState<{
@@ -33,15 +69,32 @@ export default function App(): JSX.Element {
     total: number;
   } | null>(null);
 
-  const handleLogin = (username: string) => {
-    if (username.trim().toLowerCase() === "admin") {
-      setScreen("admin");
+  // Handle login logic
+  const handleLogin = (username: string, password: string) => {
+    // makes sure its the right username and password for the admin to enter Admin screen
+    if (username.trim() === "") {
+      alert("Please enter a valid username");
+      return;
+    }
+    if (password.trim() === "") {
+      alert("Please enter a valid password");
+      return;
+    }
+
+    // Simple auth: "admin" with password "111" goes to Admin, others to Customer
+    if (username.trim().toLowerCase() === "admin" ) {
+      if (password === "111") {
+        setScreen("admin");
+      } else {
+        alert("Invalid password for admin");
+      }
     } else {
       setScreen("customer");
     }
   };
 
   return (
+    // SafeAreaView to avoid notches
     <SafeAreaView style={styles.container}>
       {screen === "login" && <LoginScreen onLogin={handleLogin} />}
 
@@ -75,62 +128,27 @@ export default function App(): JSX.Element {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, 
+  container: {
+    flex: 1,
+    backgroundColor: "#c3f0e6ff",
+  },
+
+  screen: {
+    flex: 1,
+    padding: 20,
     backgroundColor: "#cfd6f3ff",
-   },
-
-  screen:
-   { flex: 1,
-    backgroundColor: "#cfd6f3ff",
-   padding: 20, 
   },
 
-  logoSmall: { 
-    fontSize: 18, 
-    fontWeight: "700", 
-    marginBottom: 12, 
+Image: {
+    width: 100,
+    height: 60,
+    resizeMode: "cover",
+    borderRadius: 4,
   },
 
-  card: { 
-    backgroundColor: "white", 
-    padding: 16, 
-    borderRadius: 10 
+  carInfo: {
+    flex: 1,
+    marginLeft: 12,
   },
   
-  h1: { 
-    fontSize: 16, 
-    fontWeight: "700", 
-    marginBottom: 8 
-  },
-
-  input: { 
-    borderWidth: 1, 
-    borderColor: "#ddd", 
-    borderRadius: 8, 
-    padding: 10, 
-    marginTop: 8 
-  },
-  
-  button: {
-    backgroundColor: "#2b7cff", 
-    padding: 12, 
-    borderRadius: 8, 
-    alignItems: "center", 
-    marginTop: 12 
-  },
-  
-  buttonText: { 
-    color: "white", 
-    fontWeight: "700" 
-  },
-  
-  helperText: { 
-    marginTop: 8, 
-    color: "#777" 
-  },
- 
-   
 });
-
-
-
